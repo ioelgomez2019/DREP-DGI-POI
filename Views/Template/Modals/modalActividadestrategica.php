@@ -11,32 +11,44 @@
       <div class="modal-body">
             <form id="formActividadestrategica" name="formActividadestrategica" class="form-horizontal">
               <input type="hidden" id="idActividadestrategica" name="idActividadestrategica" value="">
-              <p class="text-primary">Usted esta llenando la fase de iniciacion de Actividad estrategica</p>
+              
               <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for="txtCodrp">Codigo de registro poi</label>
-                  <input type="text" class="form-control valid validText" id="txtCodrp" name="txtCodrp"  placeholder="OEI.01.3" disabled="">
-                </div>
-                <div class="form-group col-md-8">
-                  <label for="txtNombreaep">Nombre Actividad Estrategica perteneciente</label>
-                  <input type="text" class="form-control valid validText" id="txtNombreaep" name="txtNombreaep"  placeholder="Capacidad de fortalecer a los estudaintes" disabled="">
-                </div>
-
                 
+                <div class="form-group col-md-2">
+                  <label for="txtACOei">Codigo de OEI</label>
+                  <input type="text" class="form-control valid validText" id="txtACOei" name="txtACOei"  placeholder="" disabled="">
+                </div>
+                <div class="form-group col-md-10">
+                  <label for="txtAOei">Objetivo Estrategico Institucional</label>
+                  <input type="text" class="form-control valid validText" id="txtAOei" name="txtAOei"  placeholder="" disabled="">
+                </div>
               </div>
               <div class="form-row">
+                
+                <div class="form-group col-md-2">
+                  <label for="txtACAei">Codigo de AEI </label>
+                  <input type="text" class="form-control valid validText" id="txtACAei" name="txtACAei"  placeholder="" disabled="">
+                </div>
+                <div class="form-group col-md-10">
+                  <label for="txtCAei">Accion Estrategica Instituciona</label>
+                  <input type="text" class="form-control valid validText" id="txtCAei" name="txtCAei"  placeholder="" disabled="">
+                </div>
+              </div>
+              <p class="text-primary">Los campos con (<span class="required">*</span>) son obligatorios</p>
+              <div class="form-row">
+
                 <div class="form-group col-md-6">
                   <label for="txtNombreao">Nombre de la Actividad Operativa <span class="required">*</span></label>
-                  <input type="text" class="form-control valid validText" id="txtNombreao" name="txtNombreao" required="">
+                  <input type="text" class="form-control valid validText" id="txtNombreao" name="txtNombreao" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="txtProgp">Programa presupuestal <span class="required">*</span></label>
-                  <select class="form-control selectpicker" data-live-search="true" id="txtProgp" name="txtProgp" required >
+                  <select class="form-control selectpicker" data-live-search="true" id="txtProgp" name="txtProgp" >
                   </select>
                 </div>
                 <div class="form-group col-md-2">
                   <label for="txtCodpp">Codigo PP <span class="required">*</span></label>
-                  <input type="text" class="form-control valid validText" id="txtCodpp" name="txtCodpp" disabled="" >
+                  <input type="text" class="form-control valid validNumber" id="txtCodpp" name="txtCodpp" disabled maxlength="3" >
                 </div>
               </div>
               <div class="form-row">
@@ -54,9 +66,13 @@
                 <div class="form-group col-md-6">
                     <label for="txtResp">Responsable <span class="required">*</span></label>
                     <select class="form-control selectpicker" data-live-search="true" id="txtResp" name="txtResp" required >
-                      <option> Esp. Finanzas</option>
-                      <option> Esp. Planificador</option>
+                      <option value="1" id="1"> Esp. Finanzas</option>
+                      <option value="2" id="2"> Esp. Planificador</option>
                     </select>
+                </div>
+                <div class="form-group col-md-3">
+                  
+                  <input type="text" class="" id="txtNumficha" name="txtNumficha" hidden="" >
                 </div>
              </div>
 

@@ -31,6 +31,183 @@
 			return $request;
 		}
 
+		public function insertActestr(
+		string $Nombreao,
+		string $Progp,
+		string $Descao,
+		string $Descma,
+		string $Resp,
+		string $Numficha
+		) {
+		//[idActividadestrategica] => 
+	    //[txtNombreao] => asdw
+	    //[txtProgp] => 2
+	    //[txtDescao] => asdsa
+	    //[txtDescma] => sadsa
+	    //[txtResp] => Esp. Planificador
+	    //[txtNumficha] => 24
+			$this->strNombreao = $Nombreao;
+			$this->strProgp = $Progp;
+			//$this->strCoe = $coe;
+			$this->strDescao = $Descao;
+			//$this->strUmoe = $umoe;
+			$this->strDescma = $Descma;
+			$this->strResp = $Resp;
+			$this->strNumficha = $Numficha;
+			
+
+			$query_strProgp = "SELECT
+								nombre_pp,cod_pp
+							FROM
+								programa_pre
+								WHERE 
+								idprograma_pre = '$this->strProgp' 
+								
+								LIMIT 1";
+
+			$request_strProgp = $this->select($query_strProgp);
+			$data = [
+				$this->strNombreao, //nombre_act
+				$request_strProgp['nombre_pp'], //programa_pre
+				$request_strProgp['cod_pp'], //codigo_pp
+				$this->strDescao, //desc_act_ope
+				$this->strDescma, //desc_cua_met
+				$this->strResp, //responsable
+				$this->strNumficha, //registropoi_idregistro 
+				$this->strProgp //programa_pre_idprograma_pre
+			];
+
+			//var_dump($data);
+
+			$query_insert  = "INSERT INTO actividad(
+				nombre_act,
+				programa_pre,
+				codigo_pp,
+				desc_act_ope,
+				desc_cua_met,
+				responsable,
+				registropoi_idregistro,
+				programa_pre_idprograma_pre
+			) VALUES(?,?,?,?,?,?,?,?)";
+
+			$res = $this->insert($query_insert, $data);
+			//var_dump($res);
+			$return = $res;
+			return $return;
+		}
+
+	 	//[idActividadestrategica] => 5
+	    //[txtNombreao] => Asd
+	    //[txtProgp] => 2
+	    //[txtCodpp] => 9002
+	    //[txtDescao] => asd
+	    //[txtDescma] => asd
+	    //[txtResp] => 1
+		public function updateActestr(
+			int $idActividadestrategica, 
+			string $Nombreao, 
+			int $Progp, 
+			string $Descao, 
+			string $Descma, 
+			string $Resp){
+
+			$this->idActividadestrategica = $idActividadestrategica;
+			$this->strNombreao = $Nombreao;
+			$this->strProgp = $Progp;
+			$this->strDescao = $Descao;
+			$this->strDescma = $Descma;
+			$this->strResp = $Resp;
+			
+
+			$sql = "SELECT
+					actividad.*
+				FROM
+					actividad
+					WHERE
+					actividad.idcodigo_act =  '$this->idActividadestrategica' ";
+			$request = $this->select_all($sql);
+
+			$query_strProgp = "SELECT
+							programa_pre.nombre_pp, 
+							programa_pre.cod_pp, 
+							actividad.responsable
+						FROM
+							actividad
+							INNER JOIN
+							programa_pre
+							ON 
+								actividad.programa_pre_idprograma_pre = programa_pre.idprograma_pre
+								WHERE 
+								actividad.idcodigo_act = '$this->strProgp' 
+							
+							LIMIT 1";
+
+			$request_strProgp = $this->select($query_strProgp);
+
+			//if(empty($request))
+			//{
+				
+			
+				$sql = "UPDATE actividad SET nombre_act=?, programa_pre=?, codigo_pp=?, desc_act_ope=?, desc_cua_met=?, responsable=? 
+						WHERE idcodigo_act = $this->idActividadestrategica ";
+				$arrData = array(
+						$this->strNombreao, //nombre_act
+						$request_strProgp['nombre_pp'], //programa_pre
+						$request_strProgp['cod_pp'], //codigo_pp
+						$this->strDescao, //desc_act_ope
+						$this->strDescma, //desc_cua_met
+						$request_strProgp['responsable']
+	       					);
+				
+				$request = $this->update($sql,$arrData);
+			/*}else{
+				$request = "exist";
+			}*/
+		return $request;
+		
+		}
+
+
+		public function deleteUsuario(int $intIdpersona)
+		{
+			$this->intIdUsuario = $intIdpersona;
+			$sql = "UPDATE persona SET status = ? WHERE idpersona = $this->intIdUsuario ";
+			$arrData = array(0);
+			$request = $this->update($sql,$arrData);
+			return $request;
+		}
+
+		public function Selectallregistroact(int $idreg)
+		{
+			$this->intIdregistroact = $idreg;
+			$sql = "SELECT
+							actividad.idcodigo_act, 
+							actividad.nombre_act, 
+							actividad.programa_pre, 
+							actividad.codigo_pp, 
+							actividad.desc_act_ope, 
+							actividad.desc_cua_met, 
+							actividad.responsable, 
+							actividad.registropoi_idregistro, 
+							actividad.programa_pre_idprograma_pre, 
+							registropoi.codigooe, 
+							registropoi.objestrinst, 
+							registropoi.codigoae, 
+							registropoi.accestrinst
+						FROM
+							actividad
+							INNER JOIN
+							registropoi
+							ON 
+								actividad.registropoi_idregistro = registropoi.idregistro
+								WHERE 
+								actividad.idcodigo_act = $this->intIdregistroact
+						LIMIT 1";
+
+			$request = $this->select($sql);
+			return $request;
+		}
+
 		public function Selectactest(){
 			
 			$sql = "SELECT

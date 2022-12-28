@@ -110,6 +110,71 @@ class RegistropoiModel extends Mysql
 		return $return;
 	}
 
+	public function insertActestr(
+		string $Nombreao,
+		string $Progp,
+		string $Descao,
+		string $Descma,
+		string $Resp,
+		string $Numficha
+	) {
+	//[idActividadestrategica] => 
+    //[txtNombreao] => asdw
+    //[txtProgp] => 2
+    //[txtDescao] => asdsa
+    //[txtDescma] => sadsa
+    //[txtResp] => Esp. Planificador
+    //[txtNumficha] => 24
+		$this->strNombreao = $Nombreao;
+		$this->strProgp = $Progp;
+		//$this->strCoe = $coe;
+		$this->strDescao = $Descao;
+		//$this->strUmoe = $umoe;
+		$this->strDescma = $Descma;
+		$this->strResp = $Resp;
+		$this->strNumficha = $Numficha;
+		
+
+		$query_strProgp = "SELECT
+							nombre_pp,cod_pp
+						FROM
+							programa_pre
+							WHERE 
+							idprograma_pre = '$this->strProgp' 
+							
+							LIMIT 1";
+
+		$request_strProgp = $this->select($query_strProgp);
+		$data = [
+			$this->strNombreao, //nombre_act
+			$request_strProgp['nombre_pp'], //programa_pre
+			$request_strProgp['cod_pp'], //codigo_pp
+			$this->strDescao, //desc_act_ope
+			$this->strDescma, //desc_cua_met
+			$this->strResp, //responsable
+			$this->strNumficha, //registropoi_idregistro 
+			$this->strProgp //programa_pre_idprograma_pre
+		];
+
+		//var_dump($data);
+
+		$query_insert  = "INSERT INTO actividad(
+			nombre_act,
+			programa_pre,
+			codigo_pp,
+			desc_act_ope,
+			desc_cua_met,
+			responsable,
+			registropoi_idregistro,
+			programa_pre_idprograma_pre
+		) VALUES(?,?,?,?,?,?,?,?)";
+
+		$res = $this->insert($query_insert, $data);
+		//var_dump($res);
+		$return = $res;
+		return $return;
+	}
+
 	public function Selectallregistropoi(int $idreg)
 	{
 		$this->intIdregistropoi = $idreg;

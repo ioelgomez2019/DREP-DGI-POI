@@ -80,16 +80,19 @@ document.addEventListener('DOMContentLoaded', function () {
         var formActividadestrategica = document.querySelector("#formActividadestrategica");
         formActividadestrategica.onsubmit = function (e) {
             e.preventDefault();
+
+
+
             var strNombreao = document.querySelector('#txtNombreao').value;
             var strProgp = document.querySelector('#txtProgp').value;
-            
             var strDescao = document.querySelector('#txtDescao').value;
             var strDescma = document.querySelector('#txtDescma').value;
-            var intResp = document.querySelector('#txtResp').value;
+            var strResp = document.querySelector('#txtResp').value;
+
             if (strNombreao == '' 
             || strProgp == '' 
             
-            || strDescao == '' || strDescma == '' || intResp == '') {
+            || strDescao == '' || strDescma == '' || strResp == '') {
                 swal("Atención", "Todos los campos son obligatorios.", "error");
                 return false;
             }
@@ -98,6 +101,24 @@ document.addEventListener('DOMContentLoaded', function () {
             var formData = new FormData(formActividadestrategica);
             request.open("POST", ajaxUrl, true);
             request.send(formData);
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    
+                    var objData = JSON.parse(request.responseText);
+                    //console.log(objData);
+                    if (objData.status) 
+                    {
+                        $('#modalFormActividadestrategica').modal("hide");
+                        formActividadestrategica.reset();
+                        swal("Actividad Estrategica", objData.msg, "success");
+                        tableRegistropoi.api().ajax.reload();
+                    } else {
+                        swal("Error", objData.msg, "error");
+                    }
+                }
+                //divLoading.style.display = "none";
+                return false;
+            }
 
         }
     }
@@ -434,7 +455,7 @@ function fntEditInfo(idregistro){
 }
 
 function openModal() {
-    rowTable = "";
+    
     document.querySelector('#idRegistropoi').value = '';
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
@@ -455,6 +476,37 @@ function openModalacte() {
     document.querySelector('#titleModal').innerHTML = "Nuevo Registro De Actividad Estrategica";
     document.querySelector("#formActividadestrategica");
     $('#modalFormActividadestrategica').modal('show');
+}
+function fntGenAct(idregistro){
+
+    //rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML = "Nuevo Registro De Actividad Estrategica";
+    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
+    document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
+    document.querySelector('#btnText').innerHTML = "Guardar";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Registropoi/getSelectallregistropoi/' + idregistro;
+    //let ajaxUrl = base_url+'/Clientes/getCliente/'+idpersona;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            
+                
+                document.querySelector("#txtACOei").value = objData.codigooe;
+                document.querySelector("#txtAOei").value = objData.objestrinst;
+
+                document.querySelector("#txtACAei").value = objData.codigoae;
+                document.querySelector("#txtCAei").value = objData.accestrinst;
+
+                document.querySelector("#txtNumficha").value =objData.idregistro;
+                //document.querySelector(".txtNumficha").id=
+            
+        }
+        $('#modalFormActividadestrategica').modal('show');
+    }
 }
 
 function cargarPP1() {

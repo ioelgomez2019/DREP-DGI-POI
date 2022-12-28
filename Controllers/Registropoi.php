@@ -19,7 +19,7 @@ class Registropoi extends Controllers
 		$arrData = $this->model->Selectregistrop();
 		for ($i = 0; $i < count($arrData); $i++) {
 			if ($_SESSION['permisosMod']['u']) {
-				$btnView = '<button class="btn btn-info btn-sm btnView" onClick="openModalacte(' . $arrData[$i]['idregistro'] . ')" title="Generar Actividad"><i class="fas fa-eye"></i></button>';
+				$btnView = '<button class="btn btn-info btn-sm btnView" onClick="fntGenAct(' . $arrData[$i]['idregistro'] . ')" title="Generar Actividad"><i class="fas fa-eye"></i></button>';
 				$btnEdit = '<button class="btn btn-primary btn-sm btnEditRegistro" onClick="fntEditInfo(' . $arrData[$i]['idregistro'] . ')" title="Editar"><i class="fas fa-pencil-alt"></i></button>';
 			}
 			if ($_SESSION['permisosMod']['d']) {
@@ -121,8 +121,62 @@ class Registropoi extends Controllers
 	}
 	public function putActividadestr()
 	{
+	/**
 		if ($_POST) 
-		dep($_POST);
+			dep($_POST);
+		**/
+		if ($_POST) {
+			
+
+			//[idActividadestrategica] => 
+		    //[txtNombreao] => accion para maestros
+		    //[txtProgp] => 2
+		    //[txtDescao] => ACCION DE GRACIA
+		    //[txtDescma] => DESCRIPCION DE METAS
+		    //[txtResp] => Esp. Planificador
+
+
+
+			if (
+				empty($_POST['txtNombreao']) || empty($_POST['txtProgp'])
+				|| empty($_POST['txtDescao']) || empty($_POST['txtDescma'])
+				|| empty($_POST['txtResp'])
+			) 
+			{
+				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos. joel');
+			}else {
+				//$idUsuario = intval($_POST['idUsuario']);
+				$strNombreao = ucwords(strClean($_POST['txtNombreao']));
+				$strProgp = strClean($_POST['txtProgp']);
+				//$strCoe = ucwords(strClean($_POST['txtCoe']));
+				$strDescao = strClean($_POST['txtDescao']);
+				//$strUmoe = intval(strClean($_POST['txtUmoe']));
+				$strDescma = strClean($_POST['txtDescma']);
+				$strResp = strClean($_POST['txtResp']);
+
+				$strNumficha = strClean($_POST['txtNumficha']);
+
+				$request_act = $this->model->insertActestr(
+					$strNombreao,
+					$strProgp,
+					//$strCoe,
+					$strDescao,
+					//$strUmoe,
+					$strDescma,
+					$strResp,
+					$strNumficha
+				);
+
+
+				if ($request_act > 0) {
+					$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+				} else {
+					$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+				}
+			}
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+		
 		die();
 	}
 
