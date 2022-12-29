@@ -1,8 +1,6 @@
 <?php 
     headerAdmin($data); 
-    getModal('modalActividadestrategica',$data);
-    getModal('modalRegistropoi',$data);
-    getModal('modalRegistro',$data);
+    
 
 ?>
   <main class="app-content">    

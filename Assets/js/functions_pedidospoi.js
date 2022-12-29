@@ -38,5 +38,35 @@ document.addEventListener('DOMContentLoaded', function () {
         "order": [[0, "desc"]]
     });
 });
+function btnimdprimir(idfichapoi){
+    alert(idfichapoi);
 
+}
+
+function btnimprimir(idregistro){
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    //let ajaxUrl = base_url + '/Pedidospoi/getSelectallregistropoi/' + idregistro;
+    let ajaxUrl = base_url + '/Pedidospoi/generarPdf/' + idregistro;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            //let objData = JSON.parse(request.responseText);
+            window.open(ajaxUrl, '_blank');
+            //window.location.href = ajaxUrl;
+            //alert("hola mindo");
+            
+        }
+    }
+}
+
+ function functionconsutasx() {
+    if (document.querySelector('#txtCc')) {
+        var ajaxUrl = base_url + '/Pedidospoi/getselectpedidos';
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
+    }
+
+}
 $('#tableRegistropoi').DataTable();
