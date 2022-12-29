@@ -140,13 +140,11 @@ window.addEventListener('load', function () {
 }, false)
 
 
-function fntCentroCosto() {
-    
+function fntCentroCosto() { 
     var ajaxUrl = base_url + '/Registropoi/getSelectcc';
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     request.open("GET", ajaxUrl, true);
     request.send();
-
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
             const objData = JSON.parse(request.responseText);

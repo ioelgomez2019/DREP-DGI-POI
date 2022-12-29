@@ -20,6 +20,17 @@
 			parent::__construct();
 		}
 
+		public function Selectinsumos(){
+			
+			$sql = "SELECT
+						insumos.idrequerimientos, 
+						insumos.espe_identificador, 
+						insumos.espe_nombre
+					FROM
+						insumos";
+			$request = $this->select_all($sql);
+			return $request;
+		}
 
 		public function Selectpp(){
 			
@@ -30,6 +41,75 @@
 			$request = $this->select_all($sql);
 			return $request;
 		}
+//insertar cuadro de nesesidad
+		public function insertCuanes(
+			string $Requerimiento, 
+			int $Espgas, 
+			string $Codigocn, 
+			string $Unidadmed, 
+			string $Cant, 
+			string $Costunit, 
+			string $Mes,
+			int $idactestrategica
+		) {
+		//[txtRequerimiento] => sadsa
+    	//[txtEspgas] => 3
+    	//[txtCodigocn] => 2.1.15.21
+    	//[txtUnidadmed] => paquete
+    	//[txtCant] => 231
+    	//[txtCostunit] => 124
+    	//[txtMes] => Marzo
+			//idactestrategica
+			$this->strRequerimiento = $Requerimiento;
+			$this->intEspgas = $Espgas;
+			$this->strCodigocn = $Codigocn;
+			$this->strUnidadmed = $Unidadmed;
+			$this->strCant = $Cant;
+			$this->strCostunit = $Costunit;
+			$this->strMes = $Mes;
+			$this->idactestrategica = $idactestrategica;
+			
+			
+			$sql = "SELECT
+						insumos.espe_nombre 
+					FROM
+						insumos
+						WHERE 
+						insumos.idrequerimientos = '$this->intEspgas' LIMIT 1";
+			$request = $this->select($sql);
+
+			$data = [
+				$this->strRequerimiento, //requerimiento
+				$this->strCodigocn, //espe_gas_cod
+				$request['espe_nombre'], //espe_gas_nombre
+				$this->strUnidadmed, //unidad_med
+				$this->strCant, //cantidad
+				$this->strCostunit, //costo_unitario
+				$this->strMes, //gastoMES 
+				$this->idactestrategica,//actividad_codActividad
+				$this->intEspgas //insumos_idrequerimientos
+			];
+
+			//var_dump($data);
+
+			$query_insert  = "INSERT INTO cuadro_necesidades(
+				requerimiento,
+				espe_gas_cod,
+				espe_gas_nombre,
+				unidad_med,
+				cantidad,
+				costo_unitario,
+				gastoMES,
+				actividad_codActividad,
+			insumos_idrequerimientos
+			) VALUES(?,?,?,?,?,?,?,?,?)";
+
+			$res = $this->insert($query_insert, $data);
+			var_dump($res);
+			$return = $res;
+			return $return;
+		}
+
 
 		public function insertActestr(
 		string $Nombreao,
@@ -168,7 +248,17 @@
 		return $request;
 		
 		}
-
+		public function Selectinsumos2(){
+			
+			$sql = "SELECT
+						insumos.idrequerimientos, 
+						insumos.espe_identificador, 
+						insumos.espe_nombre
+					FROM
+						insumos";
+			$request = $this->select_all($sql);
+			return $request;
+		}
 
 		public function deleteUsuario(int $intIdpersona)
 		{

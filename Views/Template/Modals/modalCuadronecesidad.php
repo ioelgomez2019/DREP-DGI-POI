@@ -15,31 +15,48 @@
       <div class="modal-body">
             <form id="formCuadronecesidad" name="formCuadronecesidad" class="form-horizontal">
               <input type="hidden" id="idCuadronecesidad" name="idCuadronecesidad" value="">
-              <p class="text-primary">Usted esta llenando los requrimientos de la ficha poi<button type="button" class="btn btn-primary" onclick="agregarreq()">
+              <!--<p class="text-primary">Usted esta llenando los requrimientos de la ficha poi<button type="button" class="btn btn-primary" >
                 Agregar  + 1
               </button>
               </p>
-              <h4 id="requerimiento" >Requerimiento 1</h4>        
+              <h4 id="requerimiento" >Requerimiento 1</h4>  -->      
               <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for="txtNombreae">Requerimiento <span class="required">*</span></label>
-                  <input type="text" class="form-control valid validText" id="txtCae" name="txtCae" required=""  >
+                <div class="form-group col-md-6">
+                  <label for="txtRequerimiento">Requerimiento <span class="required">*</span></label>
+                  <input type="text" class="form-control valid validText" id="txtRequerimiento" name="txtRequerimiento" required=""  >
                 </div>
-                <div class="form-group col-md-4">
-                  <label for="txtNombreae">Especifica de gasto <span class="required">*</span></label>
-                  <input type="text" class="form-control valid validText" id="txtCae" name="txtCae" required="" >
+                <div class="form-group col-md-6">
+                  <label for="txtEspgas">Especifica de gasto<span class="required">*</span></label>
+                  <select class="form-control selectpiker" data-none-selected-text="please select..." data-live-search="true" id="txtEspgas" name="txtEspgas"  required="" >
+                  
+                  </select>
                 </div>
-                <div class="form-group col-md-2">
-                  <label for="txtNombreae">Cantidad <span class="required">*</span></label>
-                  <input type="text" class="form-control valid validNumber" id="txtMoe" name="txtMoe" required="" onkeypress="return controlTag(event);" maxlength="3">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="txtCodigocn">Codigo<span class="required">*</span></label>
+                  <input type="text" class="form-control valid validText" value="" id="txtCodigocn" name="txtCodigocn" required=""  >
                 </div>
-                <div class="form-group col-md-4">
-                  <label for="txtNombreae">Especifica de mes<span class="required">*</span></label>
-                  <input type="date" id="start" name="trip-start"
-                     value=""
-                     min="2022-01-01" max="2023-12-31">
+                <div class="form-group col-md-3">
+                  <label for="txtUnidadmed">Unidad Medida<span class="required">*</span></label>
+                  <input type="text" class="form-control valid validText" id="txtUnidadmed" name="txtUnidadmed" required=""  >
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="txtCant">Cantidad <span class="required">*</span></label>
+                  <input type="text" class="form-control valid validNumber" id="txtCant" name="txtCant" required=""  maxlength="3">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="txtCostunit">Costo unitario <span class="required">*</span></label>
+                  <input type="text" class="form-control valid " id="txtCostunit" name="txtCostunit" required=""  >
+                </div>
+              </div>
+              <div class="form-row">
 
+                <div class="form-group col-md-4">
+                  <label for="txtMes">Especifica de mes<span class="required">*</span></label>
+                  <input type="text" class="form-control valid " id="txtMes" name="txtMes" required=""  >
                 </div>
+                <input type="text" class="form-control valid " id="idactestrategica" name="idactestrategica" hidden="" >
               </div>
 
               <div class="form-row" id="addreq">

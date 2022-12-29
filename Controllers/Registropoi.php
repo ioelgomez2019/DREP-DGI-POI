@@ -13,6 +13,7 @@ class Registropoi extends Controllers
 	}
 	public function getSelectregistrop()
 	{
+		
 		$btnView = '';
 		$btnEdit = '';
 		$btnDelete = '';

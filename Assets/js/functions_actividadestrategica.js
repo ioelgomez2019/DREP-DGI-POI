@@ -27,6 +27,56 @@ document.addEventListener('DOMContentLoaded', function(){
         "iDisplayLength": 10,
         "order":[[0,"desc"]]  
     });
+    //Insertar Actividad Estrategica
+    if (document.querySelector("#formCuadronecesidad")) {
+        var formCuadronecesidad = document.querySelector("#formCuadronecesidad");
+        formCuadronecesidad.onsubmit = function (e) {
+            e.preventDefault();
+            var strRequerimiento = document.querySelector('#txtRequerimiento').value;
+            var strCodigocn = document.querySelector('#txtCodigocn').value;
+            var strUnidadmed = document.querySelector('#txtUnidadmed').value;
+            var strCant = document.querySelector('#txtCant').value;
+            var strCostunit = document.querySelector('#txtCostunit').value;
+            var strMes = document.querySelector('#txtMes').value;
+
+            if (strRequerimiento == '' 
+            || strCodigocn == '' 
+            
+            || strUnidadmed == '' || strCant == '' || strCostunit == ''||strMes== '') {
+                swal("Atención", "Todos los campos son obligatorios.", "error");
+                return false;
+            }
+            var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            //var ajaxUrl = base_url + '/Registropoi/putActividadestr';
+            //var ajaxUrl = base_url+'/Cuadronecesidad/setCuadronesesidad'; //put perfil
+            var ajaxUrl = base_url+'/Actividadestrategica/putCuadronesesidad'; //put perfil
+            var formData = new FormData(formCuadronecesidad);
+            request.open("POST", ajaxUrl, true);
+            request.send(formData);
+            
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    
+                    var objData = request.responseText;
+                    console.log(objData);
+                    if (objData) 
+                    {
+                        $('#modalFormCuadronecesidad').modal("hide");
+                        formCuadronecesidad.reset();
+                        swal("Producto agregado ", objData.msg, "success");
+                        tableCuadrones.api().ajax.reload();
+                    } else {
+                        swal("Error", objData.msg, "error");
+                    }
+                }
+                //divLoading.style.display = "none";
+                return false;
+            }
+            
+            
+
+        }
+    }
     //Actualizar Actividad Estrategica
     if (document.querySelector("#formActividadestrategica")) {
         var formActividadestrategica = document.querySelector("#formActividadestrategica");
@@ -79,10 +129,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 window.addEventListener('load', function() {
         cargarPP();
-        /*fntViewUsuario();
-        fntEditUsuario();
-        fntDelUsuario();*/
+        fntInsumos();
+        
 }, false);
+
 
 
 
@@ -139,7 +189,7 @@ function fntEditInfoact(idregistro){
 
 
 $('#tableActividad').DataTable();
-function openModalcua()
+function openModalcua2()
 {
     document.querySelector('#idCuadronecesidad').value ='';
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
@@ -149,42 +199,89 @@ function openModalcua()
     document.querySelector("#formCuadronecesidad");
     $('#modalFormCuadronecesidad').modal('show');
 }
+function openModalcua(idregistro){
+
+    //rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML = "Nuevo Registro De Actividad Estrategica";
+    document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
+    document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
+    document.querySelector('#btnText').innerHTML = "Guardar";
+    
+           
+            
+                
+               
+
+                document.querySelector("#idactestrategica").value =idregistro;
+                //document.querySelector(".txtNumficha").id=
+            
+        
+        $('#modalFormCuadronecesidad').modal('show');
+    
+}
 
 
 function cargarPP() {
-    select = document.getElementById('txtProgp');
-    var ajaxUrl = base_url + '/Actividadestrategica/getSelectpp';
-    //var ajaxUrl = base_url+'/Registropoi/getSelectObjetivoestricoNombre';
-    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    request.open("GET", ajaxUrl, true);
-    request.send();
+    
+        select = document.getElementById('txtProgp');
+        var ajaxUrl = base_url + '/Actividadestrategica/getSelectpp';
+        //var ajaxUrl = base_url+'/Registropoi/getSelectObjetivoestricoNombre';
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET", ajaxUrl, true);
+        request.send();
 
-    request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            //document.querySelector('#txtCc').innerHTML = request.responseText;
-            //$('#txtCc').selectpicker('refresh');
-            const objData = JSON.parse(request.responseText);
-            console.log(objData);
-            //alert(objData.length);
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                const objDatapp = JSON.parse(request.responseText);
+                console.log(objDatapp);
+                var cadena = "";
+                for (var i = 0; i < objDatapp.length; i++) {
+                    cadena = cadena + '<option  value=' + objDatapp[i].idprograma_pre + '  >' + objDatapp[i].nombre_pp + '</option>';
+                }
+                document.getElementById("txtProgp").innerHTML = cadena;
+                $('#txtProgp').selectpicker('refresh');
+                $('#txtProgp').selectpicker('refresh');
+                $(document).on('change', '#txtProgp', function (event) {
+                    var value;
+                    value = $(this).val();
+                    objDatapp[value - 1];
+                    document.querySelector('#txtCodpp').value = objDatapp[value - 1].cod_pp;
+                });
+            }
+        }
+    
+}
+function fntInsumos() {
+//$(document).on('change', '#txtOei', function (event) { 
+    //var ajaxUrl = base_url + '/Cuadronecesidad/getinsumos';
+    var ajaxUrl = base_url + '/Actividadestrategica/getSelectinsumos';
+    var requestins = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    requestins.open("GET", ajaxUrl, true);
+    requestins.send();
+    requestins.onreadystatechange = function () {
+        if (requestins.readyState == 4 && requestins.status == 200) {
+            
+            const objDatains = JSON.parse(requestins.responseText);
+            console.log(objDatains);
+            
             var cadena = "";
 
-            for (var i = 0; i < objData.length; i++) {
-                cadena = cadena + '<option  value=' + objData[i].idprograma_pre + '  >' + objData[i].nombre_pp + '</option>';
+            for (var i = 0; i < objDatains.length; i++) {
+                cadena = cadena + '<option  value=' + objDatains[i].idrequerimientos + '  >' + objDatains[i].espe_nombre + '</option>';
             }
-            document.getElementById("txtProgp").innerHTML = cadena;
-            $('#txtProgp').selectpicker('refresh');
-            $('#txtProgp').selectpicker('refresh');
-            $(document).on('change', '#txtProgp', function (event) {
+            document.getElementById("txtEspgas").innerHTML = cadena;
+            $('#txtEspgas').selectpicker('refresh');
+            $('#txtEspgas').selectpicker('refresh');
+            $(document).on('change', '#txtEspgas', function (event) {
                 var value;
                 value = $(this).val();
-                objData[value - 1];
-
-                document.querySelector('#txtCodpp').value = objData[value - 1].cod_pp;
+                objDatains[value - 1];
+                document.querySelector('#txtCodigocn').value = objDatains[value - 1].espe_identificador;
             });
         }
     }
+//});
 }
-
 //agregar a carrito
 function agregarreq(){
     var contador=1;

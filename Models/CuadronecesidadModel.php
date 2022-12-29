@@ -21,32 +21,192 @@
 		}
 
 
-		public function Selectpp(){
+		public function Selectinsumos2(){
 			
 			$sql = "SELECT
-						programa_pre.*
+						insumos.idrequerimientos, 
+						insumos.espe_identificador, 
+						insumos.espe_nombre
 					FROM
-						programa_pre";
+						insumos";
 			$request = $this->select_all($sql);
 			return $request;
 		}
+		public function Selectinsumos(){
+			
+			$sql = "SELECT
+						insumos.idrequerimientos, 
+						insumos.espe_identificador, 
+						insumos.espe_nombre
+					FROM
+						insumos";
+			$request = $this->select_all($sql);
+			return $request;
+		}
+		public function Selectallregcuanes(int $idreg)
+		{
+			$this->intIdregistropoi = $idreg;
+			$sql = "SELECT
+						cuadro_necesidades.*
+					FROM
+						cuadro_necesidades
+						WHERE
+						idNecesidad = $this->intIdregistropoi 
+						LIMIT 1";
 
+			$request = $this->select($sql);
+			return $request;
+		}
+//insertar cuanes
+
+		public function insertCuanes(
+			string $Requerimiento, 
+			int $Espgas, 
+			string $Codigocn, 
+			string $Unidadmed, 
+			string $Cant, 
+			string $Costunit, 
+			string $Mes,
+			int $idactestrategica
+		) {
+		//[txtRequerimiento] => sadsa
+    	//[txtEspgas] => 3
+    	//[txtCodigocn] => 2.1.15.21
+    	//[txtUnidadmed] => paquete
+    	//[txtCant] => 231
+    	//[txtCostunit] => 124
+    	//[txtMes] => Marzo
+			//idactestrategica
+			$this->strRequerimiento = $Requerimiento;
+			$this->intEspgas = $Espgas;
+			$this->strCodigocn = $Codigocn;
+			$this->strUnidadmed = $Unidadmed;
+			$this->strCant = $Cant;
+			$this->strCostunit = $Costunit;
+			$this->strMes = $Mes;
+			$this->idactestrategica = $idactestrategica;
+			
+			
+			$sql = "SELECT
+						insumos.espe_nombre 
+					FROM
+						insumos
+						WHERE 
+						insumos.idrequerimientos = '$this->intEspgas' LIMIT 1";
+			$request = $this->select($sql);
+
+			$data = [
+				$this->strRequerimiento, //requerimiento
+				$this->strCodigocn, //espe_gas_cod
+				$request['espe_nombre'], //espe_gas_nombre
+				$this->strUnidadmed, //unidad_med
+				$this->strCant, //cantidad
+				$this->strCostunit, //costo_unitario
+				$this->strMes, //gastoMES 
+				$this->idactestrategica,//actividad_codActividad
+				$this->intEspgas //insumos_idrequerimientos
+			];
+
+			//var_dump($data);
+
+			$query_insert  = "INSERT INTO cuadro_necesidades(
+				requerimiento,
+				espe_gas_cod,
+				espe_gas_nombre,
+				unidad_med,
+				cantidad,
+				costo_unitario,
+				gastoMES,
+				actividad_codActividad,
+			insumos_idrequerimientos
+			) VALUES(?,?,?,?,?,?,?,?,?)";
+
+			$res = $this->insert($query_insert, $data);
+			var_dump($res);
+			$return = $res;
+			return $return;
+		}
+//update
+		public function updateCuanes(
+			int $idCuadronecesidad, 
+			string $Requerimiento, 
+			int $Espgas, 
+			string $Codigocn, 
+			string $Unidadmed, 
+			string $Cant, 
+			string $Costunit, 
+			string $Mes){
+			//[idCuadronecesidad] => 3
+		    //[txtRequerimiento] => Papel bond
+		    //[txtEspgas] => 3
+		    //[txtCodigocn] => 2.1.15.21
+		    //[txtUnidadmed] => paquete
+		   // [txtCant] => 3
+		   // [txtCostunit] => 11
+		   // [txtMes] => Enero
+
+			$this->idCuadronecesidad = $idCuadronecesidad;
+			$this->strRequerimiento = $Requerimiento;
+			$this->intEspgas = $Espgas;
+			$this->strCodigocn = $Codigocn;
+			$this->strUnidadmed = $Unidadmed;
+			$this->strCant = $Cant;
+			$this->strCostunit = $Costunit;
+			$this->strMes = $Mes;
+			
+
+			$sql = "SELECT
+						insumos.espe_nombre 
+					FROM
+						insumos
+						WHERE 
+						insumos.idrequerimientos = '$this->intEspgas' LIMIT 1";
+			$request = $this->select($sql);
+
+
+
+			//if(empty($request))
+			//{
+				
+			
+				$sql = "UPDATE cuadro_necesidades SET requerimiento=?, espe_gas_cod=?, espe_gas_nombre=?, unidad_med=?, cantidad=?, costo_unitario=?,gastoMES=?,insumos_idrequerimientos =?
+						WHERE idNecesidad  = $this->idCuadronecesidad ";
+				$arrData = array(
+						$this->strRequerimiento, //nombre_act
+						$this->strCodigocn, //nombre_act
+						$request['espe_nombre'], //programa_pre
+						 //codigo_pp
+						$this->strUnidadmed, //desc_act_ope
+						$this->strCant, //desc_cua_met
+						$this->strCostunit,
+						$this->strMes,
+						$this->intEspgas,
+	       					);
+				
+				$request = $this->update($sql,$arrData);
+			/*}else{
+				$request = "exist";
+			}*/
+		return $request;
+		
+		}
 		public function Selectcuanes(){
 			
 			$sql = "SELECT
-						registropoi.idregistro,
-						 actividad.idcodigo_act,
-						registropoi.objestrinst, 
-						registropoi.accestrinst, 
+						cuadro_necesidades.idNecesidad, 
 						actividad.nombre_act, 
-						actividad.desc_act_ope, 
-						actividad.responsable
+						cuadro_necesidades.requerimiento, 
+						cuadro_necesidades.espe_gas_nombre, 
+						cuadro_necesidades.cantidad, 
+						cuadro_necesidades.gastoMES, 
+						cuadro_necesidades.costo_unitario, 
+						cuadro_necesidades.unidad_med
 					FROM
-						registropoi
-						INNER JOIN
 						actividad
+						INNER JOIN
+						cuadro_necesidades
 						ON 
-							registropoi.idregistro = actividad.registropoi_idregistro";
+							actividad.idcodigo_act = cuadro_necesidades.actividad_codActividad";
 			$request = $this->select_all($sql);
 			return $request;
 		}
