@@ -85,6 +85,7 @@ window.addEventListener('load', function() {
 }, false);
 
 
+
 function fntEditInfoact(idregistro){
 
     //rowTable = element.parentNode.parentNode.parentNode;
@@ -183,3 +184,31 @@ function cargarPP() {
         }
     }
 }
+
+//agregar a carrito
+function agregarreq(){
+    var contador=1;
+    var contador = contador +1;
+    document.getElementById("addreq").innerHTML += '<h4 id="requerimiento" >Requerimiento '+contador+'</h4>'+
+                '<div class="form-row">'+
+                '<div class="form-group col-md-4">'+
+                 '<label for="txtNombreae">Requerimiento <span class="required">*</span></label>'+
+                  '<input type="text" class="form-control valid validText" id="txtCae" name="txtCae" required=""  >'+
+                '</div>'+
+                '<div class="form-group col-md-4">'+
+                 ' <label for="txtNombreae">Especifica de gasto <span class="required">*</span></label>'+
+                 ' <input type="text" class="form-control valid validText" id="txtCae" name="txtCae" required="" >'+
+                '</div>'+
+                '<div class="form-group col-md-2">'+
+                 ' <label for="txtNombreae">Cantidad <span class="required">*</span></label>'+
+                 ' <input type="text" class="form-control valid validNumber" id="txtMoe" name="txtMoe" required="" onkeypress="return controlTag(event);" maxlength="3">'+
+                '</div>'+
+                '<div class="form-group col-md-4">'+
+                 ' <label for="txtNombreae">Especifica de mes<span class="required">*</span></label>'+
+                  '<input type="date" id="start" name="trip-start"'+
+                   '  value=""'+
+                    ' min="2022-01-01" max="2023-12-31">'+
+                '</div>'+
+              '</div>'
+              ;
+          }

@@ -134,7 +134,6 @@ class RegistropoiModel extends Mysql
 		$this->strResp = $Resp;
 		$this->strNumficha = $Numficha;
 		
-
 		$query_strProgp = "SELECT
 							nombre_pp,cod_pp
 						FROM

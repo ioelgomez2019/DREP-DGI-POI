@@ -127,6 +127,8 @@
 					actividad.idcodigo_act =  '$this->idActividadestrategica' ";
 			$request = $this->select_all($sql);
 
+
+			
 			$query_strProgp = "SELECT
 							programa_pre.nombre_pp, 
 							programa_pre.cod_pp, 
@@ -156,7 +158,7 @@
 						$request_strProgp['cod_pp'], //codigo_pp
 						$this->strDescao, //desc_act_ope
 						$this->strDescma, //desc_cua_met
-						$request_strProgp['responsable']
+						$this->strResp
 	       					);
 				
 				$request = $this->update($sql,$arrData);

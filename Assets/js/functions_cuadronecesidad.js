@@ -27,6 +27,11 @@ document.addEventListener('DOMContentLoaded', function(){
         "order":[[0,"desc"]]  
     });
 });
+function agregarreq(){
+    document.getElementById("addreq").innerHTML += 
+              "<h3>This is the text which has been inserted by JS</h3>";
+
+}
 function openModal()
 {
     document.querySelector('#idCuadronecesidad').value ='';

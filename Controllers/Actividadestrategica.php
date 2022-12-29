@@ -80,7 +80,13 @@
 				$strResp = strClean($_POST['txtResp']);
 
 				$strNumficha = strClean($_POST['txtNumficha']);
-				
+				if($strResp = 1){
+						$strResp = "esp.Finanzas";
+
+					}
+				if($strResp = 2){
+						$strResp = "esp.Planificador";
+					}
 				$request_act = "";
 				if($idActividadestrategica == 0)
 				{
