@@ -62,10 +62,10 @@
         <?php } ?>
         <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
         <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/pedidos">
+            <a class="app-menu__item" href="<?= base_url(); ?>/pedidospoi">
                 <i class="app-menu__icon fa fa-archive" aria-hidden="true"></i>
                 
-                <span class="app-menu__label">Pedidos</span>
+                <span class="app-menu__label">Pedidos Poi</span>
             </a>
         </li>
          <?php } ?>
