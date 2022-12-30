@@ -144,8 +144,8 @@ function fntViewInfo(idpersona){
     }
 }
 
-function fntEditInfo(idpersona){
-    rowTable = element.parentNode.parentNode.parentNode;
+function fntEditInfo(element, idpersona){
+    //rowTable = element.parentNode.parentNode.parentNode;
     document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");

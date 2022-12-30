@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2022 a las 21:56:21
+-- Tiempo de generación: 30-12-2022 a las 22:11:16
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -382,10 +382,10 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `password`, `nit`, `nombrefiscal`, `direccionfiscal`, `token`, `rolid`, `datecreated`, `status`, `area`) VALUES
-(1, '71052981', 'Joel Santos', 'Gomez Alanoca', 9857452871, 'ioelgomez2019@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '24252622', 'Joel sga', 'peru lima', '6f15c99cc5b3a8778122-3335597e1301b85c9b15-6087b73cc787a8719d71-49708807a79dcf28ad32', 1, '2020-08-13 00:51:44', 1, 'DGI'),
-(2, '7865421565', 'Carlos', 'Hernández', 789465487, 'carlos@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '2c52a34f7988a0afc63e-dfe4badca8d2cb2b93e6-94824d050567a0ccd851-56165c5603c4ca020', 1, '2020-08-13 00:54:08', 1, 'dg'),
+(1, '71052981', 'Joel Santos', 'Gomez Alanoca', 9857452871, 'ioelgomez2019@gmail.com', '6afc63b048f0aea8aec66254776d725e9eecd1e5367cca63472e0faed6e92395', '24252622', 'Joel sga', 'peru lima', '6f15c99cc5b3a8778122-3335597e1301b85c9b15-6087b73cc787a8719d71-49708807a79dcf28ad32', 1, '2020-08-13 00:51:44', 1, 'DGI'),
+(2, '7865421565', 'Divan', 'Cari', 789465487, 'divancari@gmail.com', 'bb2ad88a1c61f00d0c98d2b34b46b2e9f3895f551574d2c525d1b1df1589686a', '', '', '', '2c52a34f7988a0afc63e-dfe4badca8d2cb2b93e6-94824d050567a0ccd851-56165c5603c4ca020', 1, '2020-08-13 00:54:08', 1, 'dg'),
 (3, '879846545454', 'Pablo', 'Arana', 784858856, 'pablo@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 3, '2020-08-14 01:42:34', 0, ''),
-(4, '65465465', 'Jorge David', 'Arana', 987846545, 'jorge@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 1, '2020-08-22 00:27:17', 1, ''),
+(4, '65465465', 'Roxana', 'Dgi', 987846545, 'roxana@gmail.com', '488b323ed274be65eb8be1cc44e9dac6476cdf2c4134972c2a2862dac3b50900', '', '', '', '', 3, '2020-08-22 00:27:17', 1, ''),
 (5, '4654654', 'Carme', 'Arana', 646545645, 'carmen@infom.com', 'be63ad947e82808780278e044bcd0267a6ac6b3cd1abdb107cc10b445a182eb0', '', '', '', '', 1, '2020-08-22 00:35:04', 1, ''),
 (6, '8465484', 'Alex Fernando', 'Méndez', 222222222, 'alex@info.com', '608cfa9ffc1dac43e8710cb23bbcf1d5215beee7ca8632c6a4a5a63a56f59aeb', '', '', '', '', 7, '2020-08-22 00:48:50', 0, ''),
 (7, '54684987', 'Francisco', 'Herrera', 6654456545, 'francisco@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 2, '2020-08-22 01:55:57', 1, ''),
