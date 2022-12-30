@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2022 a las 22:11:16
+-- Tiempo de generación: 30-12-2022 a las 22:20:15
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 7.4.30
 
@@ -386,7 +386,7 @@ INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `t
 (2, '7865421565', 'Divan', 'Cari', 789465487, 'divancari@gmail.com', 'bb2ad88a1c61f00d0c98d2b34b46b2e9f3895f551574d2c525d1b1df1589686a', '', '', '', '2c52a34f7988a0afc63e-dfe4badca8d2cb2b93e6-94824d050567a0ccd851-56165c5603c4ca020', 1, '2020-08-13 00:54:08', 1, 'dg'),
 (3, '879846545454', 'Pablo', 'Arana', 784858856, 'pablo@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 3, '2020-08-14 01:42:34', 0, ''),
 (4, '65465465', 'Roxana', 'Dgi', 987846545, 'roxana@gmail.com', '488b323ed274be65eb8be1cc44e9dac6476cdf2c4134972c2a2862dac3b50900', '', '', '', '', 3, '2020-08-22 00:27:17', 1, ''),
-(5, '4654654', 'Carme', 'Arana', 646545645, 'carmen@infom.com', 'be63ad947e82808780278e044bcd0267a6ac6b3cd1abdb107cc10b445a182eb0', '', '', '', '', 1, '2020-08-22 00:35:04', 1, ''),
+(5, '4654654', 'DREP PUNO', 'DGI', 646545645, 'drepunodgi@prueba.com', '434835928ff7f68cf2c5d6bfceb1b1f3be0631ab08b06676d7846272187bd278', '', '', '', '', 1, '2020-08-22 00:35:04', 1, ''),
 (6, '8465484', 'Alex Fernando', 'Méndez', 222222222, 'alex@info.com', '608cfa9ffc1dac43e8710cb23bbcf1d5215beee7ca8632c6a4a5a63a56f59aeb', '', '', '', '', 7, '2020-08-22 00:48:50', 0, ''),
 (7, '54684987', 'Francisco', 'Herrera', 6654456545, 'francisco@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '', '', '', '', 2, '2020-08-22 01:55:57', 1, ''),
 (8, '54646849844', 'Axel Gudiel', 'Vela', 654687454, 'axel@info.com', '993fdea29acd1f7c6a6423c038601b175bb282382fc85b306a85f134fff4a63e', '', '', '', '', 3, '2020-09-07 01:30:52', 1, ''),
