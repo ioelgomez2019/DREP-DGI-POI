@@ -202,30 +202,38 @@ function cargaObjetivoEI() {
             document.getElementById("txtOei").innerHTML = cadena;
             $('#txtOei').selectpicker('refresh');
             $('#txtUmoe').selectpicker('refresh');
-            $(document).on('change', '#txtOei', function (event) {
-                var value;
-                value = $(this).val();
-                objData[value - 1];
-
-                document.querySelector('#txtCoe').value = objData[value - 1].codoe;
-            });
+            //$('#txtCoe').selectpicker('refresh');
         }
     }
 }
+$(document).on('change', '#txtOei', function (event) {
+    var value;
+    value = $(this).val();
+    var ajaxUrl = base_url + '/Registropoi/getselectobjetivoestra/' + value;
+    //var ajaxUrl = base_url + '/Registropoi/getSelectObjetivoestricoNombre';
+    //var ajaxUrl = base_url+'/Registropoi/getSelectObjetivoestricoNombre';
+    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function () {
+        if(request.readyState == 4 && request.status == 200){
+             const objData = JSON.parse(request.responseText);
+            document.querySelector('#txtCoe').value = objData.codoe;
+        }
+    }
+    });
+
 function cargarIndicadorOE() {
     $(document).on('change', '#txtOei', function (event) {
         select = document.getElementById('txtOei');
         oeiseleccionado = select.value;
         select2 = document.getElementById("txtIoe");
         select3 = document.getElementById("txtAei");
-        if (oeiseleccionado == 0) {
-            oeiseleccionado = 1;
-            var ajaxUrlioe = base_url + '/Registropoi/getSelectIndicadorOE/' + oeiseleccionado;
-            var ajaxUrlaei = base_url + '/Registropoi/getSelectAccionestrategica/' + oeiseleccionado;
-        } else {
-            var ajaxUrlioe = base_url + '/Registropoi/getSelectIndicadorOE/' + oeiseleccionado;
-            var ajaxUrlaei = base_url + '/Registropoi/getSelectAccionestrategica/' + oeiseleccionado;
-        }
+        
+        var ajaxUrlioe = base_url + '/Registropoi/getSelectIndicadorOE/' + oeiseleccionado;
+
+        var ajaxUrlaei = base_url + '/Registropoi/getSelectAccionestrategica/' + oeiseleccionado;
+        
 
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
         request.open("GET", ajaxUrlioe, true);
@@ -263,37 +271,42 @@ function cargarIndicadorOE() {
     });
 }
 
-
-function cargarunidadmoe() {
-    select = document.getElementById('txtIoe');
-    oeiseleccionado = select.value;
-    select2 = document.getElementById("txtIoe");
-    ioeseleccionado = select.value;
-    if (oeiseleccionado == 0) {
-        oeiseleccionado = 1;
-        var ajaxUrlioe = base_url + '/Registropoi/getSelectUnidadMOE/' + oeiseleccionado;
-    } else {
-        var ajaxUrlioe = base_url + '/Registropoi/getSelectUnidadMOE/' + oeiseleccionado;
-    }
-
+$(document).on('change', '#txtIoe', function (event) {
+    var value;
+    value = $(this).val();
+    var ajaxUrl = base_url + '/Registropoi/getSelectUnidadMOE/' + value;
+    //var ajaxUrl = base_url + '/Registropoi/getSelectObjetivoestricoNombre';
+    //var ajaxUrl = base_url+'/Registropoi/getSelectObjetivoestricoNombre';
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    request.open("GET", ajaxUrlioe, true);
+    request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            const sub = JSON.parse(request.responseText);
-            var cadena2 = "";
-            for (var i = 0; i < sub.length; i++) {
-                var cadena3 = sub[i].nombre;
-                //alert(cadena3);
-                document.querySelector('#txtUmoe').value = sub[i].nombre;
-                $('#txtUmoe').selectpicker('refresh');
-
-            }
-
+        if(request.readyState == 4 && request.status == 200){
+             const objData = JSON.parse(request.responseText);
+            document.querySelector('#txtUmoe').value = objData.nombre;
         }
     }
+    });
+
+function cargarunidadmoe() {
+    $(document).on('change', '#txtIoe', function (event) {
+    var value;
+    value = $(this).val();
+    var ajaxUrl = base_url + '/Registropoi/getSelectUnidadMOE/' + value;
+    //var ajaxUrl = base_url + '/Registropoi/getSelectObjetivoestricoNombre';
+    //var ajaxUrl = base_url+'/Registropoi/getSelectObjetivoestricoNombre';
+    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    request.open("GET", ajaxUrl, true);
+    request.send();
+    request.onreadystatechange = function () {
+        if(request.readyState == 4 && request.status == 200){
+             const objData = JSON.parse(request.responseText);
+            document.querySelector('#txtUmoe').value = objData.nombre;
+        }
+    }
+    });
 }
+
 function cargarCAE() {
     $(document).on('change', '#txtAei', function (event) {
 

@@ -56,15 +56,29 @@ class RegistropoiModel extends Mysql
 
 		$query_strAei = "SELECT accionestr, codigoaei  from  acc_estrategica where idaccestr = '$this->strAei' limit 1 ";
 
-		$query_strIae = "SELECT nombreaei, nombre from  indicadoraei 
-						join  unidad_medidaaei on   idunidad_medidaaei =  acc_estrategica_idaccestr
-						where idindicadoraei = '$this->strIae' limit 1 ";
+			$query_strIae = "SELECT
+								indicadoraei.idindicadoraei,
+								indicadoraei.nombreaei, 
+								unidad_medidaaei.nombre
+							FROM
+								indicadoraei
+								INNER JOIN
+								unidad_medidaaei
+								ON 
+									indicadoraei.idindicadoraei = unidad_medidaaei.indicadoraei_idindicadoraei
+								INNER JOIN
+								acc_estrategica
+								ON 
+									indicadoraei.acc_estrategica_idaccestr = acc_estrategica.idaccestr
+									WHERE indicadoraei.idindicadoraei= '$this->strIae' limit 1 ";
 
 		$request_strCc = $this->select($query_strCc);
 		$request_strOei = $this->select($query_strOei);
 		$request_strIoe = $this->select($query_strIoe);
 		$request_strAei = $this->select($query_strAei);
 		$request_strIae = $this->select($query_strIae);
+
+
 
 		$data = [
 			$request_strCc['nomcentrocosto'],  //centrocosto
@@ -97,6 +111,7 @@ class RegistropoiModel extends Mysql
 			codigoae,
 			indicadorae,
 			unidmedidaae,
+
 			metaae,
 			persona_idpersona,
 			centro_costo_idcentrocosto,
@@ -207,19 +222,12 @@ class RegistropoiModel extends Mysql
 	{
 		$this->intIdindicadoroei = $idoei;
 		$sql = "SELECT
-						indicadoroei.idindicadoroei, 
-						indicadoroei.nombreoei, 
-						indicadoroei.obj_estrategico_idobjestr, 
-						unidad_medidaoei.idunidad_medidaoei, 
-						unidad_medidaoei.nombre, 
-						unidad_medidaoei.indicadoroei_idindicadoroei
-					FROM
-						indicadoroei
-						INNER JOIN
-						unidad_medidaoei
-						ON 
-							indicadoroei.idindicadoroei = unidad_medidaoei.indicadoroei_idindicadoroei
-					WHERE indicadoroei.obj_estrategico_idobjestr = $this->intIdindicadoroei";
+					indicadoroei.idindicadoroei, 
+					indicadoroei.nombreoei, 
+					indicadoroei.obj_estrategico_idobjestr
+				FROM
+					indicadoroei
+					WHERE obj_estrategico_idobjestr =  $this->intIdindicadoroei";
 		$request = $this->select_all($sql);
 		return $request;
 	}
@@ -264,6 +272,21 @@ class RegistropoiModel extends Mysql
 		$request = $this->select_all($sql);
 		return $request;
 	}
+	public function selectobjetivoestra(int $idoei)
+	{
+		$this->intIdindicadoroei = $idoei;
+		$sql = "SELECT
+				obj_estrategico.nomobjestr, 
+				obj_estrategico.codoe, 
+				obj_estrategico.`status`, 
+				obj_estrategico.idobjestr
+			FROM
+				obj_estrategico
+				WHERE
+				idobjestr  = $this->intIdindicadoroei LIMIT 1";
+		$request = $this->select($sql);
+		return $request;
+	}
 	public function SelectUnidadMOE(int $idoei)
 	{
 		$this->intIdindicadoroei = $idoei;
@@ -274,21 +297,21 @@ class RegistropoiModel extends Mysql
 					FROM
 						unidad_medidaoei
 					WHERE unidad_medidaoei.indicadoroei_idindicadoroei = $this->intIdindicadoroei";
-		$request = $this->select_all($sql);
+		$request = $this->select($sql);
 		return $request;
 	}
 	public function SelectCAE(int $idaei)
 	{
 		$this->intIdaei = $idaei;
 		$sql = "SELECT
-						acc_estrategica.idaccestr, 
-						acc_estrategica.accionestr, 
-						acc_estrategica.codigoaei, 
-						acc_estrategica.`status`, 
-						acc_estrategica.obj_estrategico_idobjestr
-					FROM
-						acc_estrategica
-					WHERE  acc_estrategica.idaccestr =  $this->intIdaei";
+					acc_estrategica.idaccestr, 
+					acc_estrategica.accionestr, 
+					acc_estrategica.codigoaei, 
+					acc_estrategica.`status`, 
+					acc_estrategica.obj_estrategico_idobjestr
+				FROM
+					acc_estrategica
+					WHERE idaccestr=  $this->intIdaei LIMIT 1";
 		$request = $this->select($sql);
 		return $request;
 	}

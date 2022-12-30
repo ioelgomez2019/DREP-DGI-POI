@@ -36,8 +36,7 @@
                 
                 <div class="form-group col-md-6">
                   <label for="txtCoe">Codigo de Objetivo Estrategico <span class="required">*</span> </label>
-
-                  <input type="text" class="form-control valid validText" id="txtCoe" name="txtCoe" required="" disabled="">
+                  <input type="text" class="form-control valid " id="txtCoe" name="txtCoe"  disabled="">
 
                     
                 </div>

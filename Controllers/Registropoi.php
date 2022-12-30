@@ -226,11 +226,11 @@ class Registropoi extends Controllers
 		$arrData = $this->model->SelectObjetivoestrategico();
 		$datajson =  json_encode($arrData, JSON_UNESCAPED_UNICODE);
 		//codificamos y consultamos la tabla objetivo estrategico
-		$arrData2 = $this->model->SelectObjetivoestricooei();
-		$datajson2 =  json_encode($arrData2, JSON_UNESCAPED_UNICODE);
+		//$arrData2 = $this->model->SelectObjetivoestricooei();
+		//$datajson2 =  json_encode($arrData2, JSON_UNESCAPED_UNICODE);
 		//traemos y consultamos la tabla indicador de objetivo estrategico isntitucional
 		//$arrDataindicadoroei = $this->model->Select();
-		$datajson =  json_encode($arrData, JSON_UNESCAPED_UNICODE);
+		//$datajson =  json_encode($arrData, JSON_UNESCAPED_UNICODE);
 		if (count($arrData) > 0) {
 			for ($i = 0; $i < count($arrData); $i++) {
 				if ($arrData[$i]['status'] == 1) {
@@ -246,7 +246,7 @@ class Registropoi extends Controllers
 	public function getSelectObjetivoestricooei()
 	{
 		//echo '<script>alert("Estoy entrandoa qui")</script>';
-		$htmlOptions = "";
+		
 		//codificamos y consultamos la tabla objetivo estrategico
 		$arrData = $this->model->SelectObjetivoestricooei();
 		$datajson =  json_encode($arrData, JSON_UNESCAPED_UNICODE);
@@ -359,6 +359,24 @@ class Registropoi extends Controllers
 
 
 		$arrData = $this->model->SelectUnidadMAE($idumae);
+		$datajson =  json_encode($arrData, JSON_UNESCAPED_UNICODE);
+		//$datajson =  json_encode($arrData,JSON_UNESCAPED_UNICODE);
+
+		if (empty($arrData)) {
+			$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+		} else {
+			$arrResponse = array('status' => true, 'data' => $arrData);
+		}
+		echo $datajson;
+
+		die();
+	}
+	public function getselectobjetivoestra(int $iaeseleccionado)
+	{
+		$idumae = intval($iaeseleccionado);
+
+
+		$arrData = $this->model->selectobjetivoestra($idumae);
 		$datajson =  json_encode($arrData, JSON_UNESCAPED_UNICODE);
 		//$datajson =  json_encode($arrData,JSON_UNESCAPED_UNICODE);
 
