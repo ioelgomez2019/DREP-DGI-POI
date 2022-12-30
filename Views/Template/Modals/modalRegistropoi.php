@@ -26,7 +26,7 @@
                 <div class="form-group col-md-12">
                   
                   <label for="txtOei">Objetivo estrategico institucional <span class="required">*</span> </label>
-                    <select  class="form-control selectpicker" data-none-selected-text="please select..." data-live-search="true" id="txtOei" name="txtOei"  required="" onchange="cargarIndicadorOE()">
+                    <select  class="form-control " data-none-selected-text="please select..." data-live-search="true" id="txtOei" name="txtOei"  required="" onchange="cargarIndicadorOE()">
                        
                     </select>
 
@@ -67,7 +67,7 @@
              <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="txtAei">Accion estrategica institucional <span class="required">*</span></label>
-                    <select class="form-control selectpicker" data-live-search="true" id="txtAei" name="txtAei"  onchange="cargarCAE()">
+                    <select class="form-control " data-live-search="true" id="txtAei" name="txtAei"  onchange="cargarCAE()">
                     </select>
                 </div>
                 </div>
@@ -81,7 +81,8 @@
              <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="txtIae">Indicador Accion Estrategica <span class="required">*</span> </label>
-                    <select class="form-control selectpicker" data-live-search="true" id="txtIae" name="txtIae" onchange="cargarUMAE()" >
+                    <select class="form-control selectpicker" data-none-selected-text="please select..." data-live-search="true"  id="txtIae" name="txtIae" onchange="cargarUMAE()" >
+                      
                     </select>
                 </div>
                 <div class="form-group col-md-6">

@@ -243,9 +243,13 @@ function cargarIndicadorOE() {
                 const sub = JSON.parse(request.responseText);
                 var cadena = "";
                 var cadena2 = "";
+                cadena = cadena + '<option selected ="selected"> ㅤ⠀ㅤㅤ⠀ㅤ</option>';
                 for (var i = 0; i < sub.length; i++) {
+
                     if (sub[i].obj_estrategico_idobjestr == oeiseleccionado) {
-                        cadena = cadena + '<option  value=' + sub[i].idindicadoroei + ' selected>' + sub[i].nombreoei + '</option>';
+                        cadena = cadena + '<option  value=' + sub[i].idindicadoroei + ' >' + sub[i].nombreoei + '</option>';
+                        //cadena.push(cadena);
+
                     }
                 }
                 document.getElementById("txtIoe").innerHTML = cadena;
@@ -404,9 +408,11 @@ function cargarCAE() {
                 const cadenaiae = JSON.parse(requestIAE.responseText);
                 var cadena4 = "";
                 //alert(cadenaiae.length);
+                cadena4 = cadena4 + '<option selected ="selected"> ㅤ⠀ㅤㅤ⠀ㅤ</option>';
                 for (var i = 0; i < cadenaiae.length; i++) {
-                    cadena4 = cadena4 + '<option  value=' + cadenaiae[i].idindicadoraei + ' selected>' + cadenaiae[i].nombreaei + '</option>';
+                    cadena4 = cadena4 + '<option   value=' + cadenaiae[i].idindicadoraei + ' >' + cadenaiae[i].nombreaei + '</option>';
                 }
+
                 //alert(cadena4);
                 document.querySelector('#txtIae').innerHTML = cadena4;
                 $('#txtIae').selectpicker('refresh');
