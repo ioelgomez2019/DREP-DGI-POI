@@ -1,7 +1,7 @@
 <?php 
 	
 	//define("BASE_URL", "http://localhost/tienda_virtual/");
-	const BASE_URL = "http://localhost/DREP-DGI-POI/";
+	const BASE_URL = "http://drep-dgi-poi.test/";
 
 	//Zona horaria
 	//date_default_timezone_set('America/Guatemala');
@@ -23,11 +23,6 @@
 	//Simbolo de moneda
 	const SMONEY = "Q";
 
-	//Datos envio de correo
-	const NOMBRE_REMITENTE = "Tienda Virtual";
-	const EMAIL_REMITENTE = "no-reply@abelosh.com";
-	const NOMBRE_EMPESA = "Tienda Virtual";
-	const WEB_EMPRESA = "www.abelosh.com";
 	
 
 
