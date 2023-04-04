@@ -5,7 +5,7 @@
   <title>DREP-CEPLAN</title>
 </head>
 <body>   
-<p>Mini Framework planificacion POI V1.1 local - <a href="https://plan.ugelsanroman.gob.pe/dashboard">www.drep.dgi.com</a></p>
+<p>Mini Framework planificacion POI V1.1 local - <a href="http://drep-dgi-poi.test/dashboard">www.drep.dgi.com</a></p>
 </body>
 </html>
 
