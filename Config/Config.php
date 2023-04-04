@@ -1,7 +1,7 @@
 <?php 
 	
 	//define("BASE_URL", "http://localhost/tienda_virtual/");
-	const BASE_URL = "https://plan.ugelsanroman.gob.pe/dashboard";
+	const BASE_URL = "https://plan.ugelsanroman.gob.pe";
 
 	//Zona horaria
 	//date_default_timezone_set('America/Guatemala');
@@ -22,14 +22,6 @@
 
 	//Simbolo de moneda
 	const SMONEY = "Q";
-
-	
-	
-
-
-
-	
-
 
  ?>
 
